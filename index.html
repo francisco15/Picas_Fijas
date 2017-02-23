@@ -11,12 +11,16 @@
     <div class="container">
       <h1 class="text-center">PICAS <span>&</span> FIJAS</h1>
       <h2 class="text-center">Ingresa <span>cuatro dígitos diferentes</span> y oprime Enter</h2>
-      <input type="text"/>
+
+      <input type="text" id="userGuess" placeholder="Tu número..."/>
+
       <div class="container results">
-        <table >
+        <div class="alert alert-danger hidden">
+          <p>Sólo números de <strong>4 cifras</strong> que <strong>no</strong> se repitan</p>
+        </div>
+        <table class="table hidden">
           <thead>
             <tr>
-              <th class="text-center">Intento</th>
               <th class="text-center">Número</th>
               <th class="text-center">Picas</th>
               <th class="text-center">Fijas</th>
