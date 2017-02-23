@@ -25,21 +25,27 @@ function game(num, guess) {
     }
     return count;
 }
+// genera el numero aleatorio
 var num = generateNumber(4);
 console.log(num.join(""));
-
+round = 0;
+// funcion que permite al usuario jugar
 $("#userGuess").keypress(function(e){
     if (e.which == 13) {
         var guess = Array.from($(this).val());
         var arrayOfNumbers = guess.map(Number);
+        var play = game(num, arrayOfNumbers);
+        round = round + 1;
         if ((!(guess.length == 4)) || hasDuplicates(arrayOfNumbers)) {
         	$(".alert").removeClass("hidden");
         }
         else {
           $(".alert").addClass("hidden");
-          var play = game(num, arrayOfNumbers);
           $(".table").removeClass("hidden");
           $("tbody").append("<tr><td>"+arrayOfNumbers.join("")+"</td><td>"+play.picas+"</td><td>"+play.fijas+"</td></tr>");
+          if (play.fijas == 4) {
+            $(".results").prepend("<p class=winner >¡GANASTE EN <span class=numGuesses >"+round+"</span> INTENTOS!</p>");
+          }
         }
     }
 })
