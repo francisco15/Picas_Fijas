@@ -13,18 +13,33 @@ function hasDuplicates(array) {
     }
     return false;
 }
+// funcion que compara el numero aleatorio con el que ingresa el usuario
+// permite saber cuantos de esos numero son picas o fijas
+function game(num, guess) {
+    var count = {fijas:0, picas:0};
+    var g = guess.join('');
+    for (var i = 0; i < num.length; i++) {
+        var present = g.search(num[i]) != -1;
+        if (num[i] == guess[i]) count.fijas++;
+        else if (present) count.picas++;
+    }
+    return count;
+}
+var num = generateNumber(4);
+console.log(num.join(""));
 
 $("#userGuess").keypress(function(e){
     if (e.which == 13) {
         var guess = Array.from($(this).val());
         var arrayOfNumbers = guess.map(Number);
-
         if ((!(guess.length == 4)) || hasDuplicates(arrayOfNumbers)) {
         	$(".alert").removeClass("hidden");
         }
         else {
           $(".alert").addClass("hidden");
+          var play = game(num, arrayOfNumbers);
+          $(".table").removeClass("hidden");
+          $("tbody").append("<tr><td>"+arrayOfNumbers.join("")+"</td><td>"+play.picas+"</td><td>"+play.fijas+"</td></tr>");
         }
     }
 })
-console.log (generateNumber(4));
