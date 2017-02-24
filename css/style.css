@@ -35,7 +35,7 @@ input[type=text], textarea {
 }
 
 .alert {
-  margin:-40px auto;
+  margin:-40px auto auto auto;
 	max-width: 350px;
 }
 
